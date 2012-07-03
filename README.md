@@ -10,7 +10,7 @@ Clone this repository from your Sublime packages directory:
 
 ```
 ⚡ cd ~/.config/sublime-text-2/Packages
-⚡ git clone https://github.com/surjikal/sublime-coffee-compile
+⚡ git clone https://github.com/surjikal/sublime-coffee-compile "Coffee Compile"
 ```
 
 
