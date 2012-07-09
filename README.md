@@ -21,10 +21,13 @@ Clone this repository from your Sublime packages directory:
 ```
 
 
-
 ##Usage
 
 Just highlight some CoffeeScript code, right click and select the _Coffee Compile_ command.
 To compile the whole file, don't highlight any text.
 
 This package assumes that the _coffee_ command is on your path (it probably is).
+
+
+##Screenshot
+![CoffeeCompile Screenshot](http://i.imgur.com/2J49Q.png)
