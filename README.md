@@ -6,6 +6,9 @@ The JavaScript output will even have syntax highlighting!
 
 ##Install
 
+### Package Control
+Install the _CoffeeCompile_ package from (Package Control)[http://wbond.net/sublime_packages/package_control].
+
 Clone this repository from your Sublime packages directory:
 
 ### Linux
