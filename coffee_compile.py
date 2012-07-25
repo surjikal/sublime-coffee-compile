@@ -6,6 +6,13 @@ import sublime
 COFFEE_COMMAND = 'coffee.cmd' if platform.system() == 'Windows' else 'coffee'
 
 
+def _log(msg):
+    print '[CoffeeCompile] %s' % msg
+
+_log('Platform is "%s"' % platform.system())
+_log('Coffee command is "%s"' % COFFEE_COMMAND)
+
+
 class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
