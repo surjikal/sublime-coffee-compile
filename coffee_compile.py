@@ -3,7 +3,9 @@ import platform
 import sublime_plugin
 import sublime
 
-COFFEE_COMMAND = 'coffee.cmd' if platform.system() == 'Windows' else 'coffee'
+
+PLATFORM_IS_WINDOWS = platform.system() == 'Windows'
+COFFEE_COMMAND = 'coffee.cmd' if PLATFORM_IS_WINDOWS else 'coffee'
 
 
 def _log(msg):
@@ -18,10 +20,14 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         text = self._get_text_to_compile()
         window = self.view.window()
+        self._setup_exec_panel(window)
 
-        panel = window.get_output_panel("exec")
-        panel.set_syntax_file('Packages/JavaScript/JavaScript.tmLanguage')
+        if PLATFORM_IS_WINDOWS:
+            text = text.replace('\n', '\\n')
 
+        self._compile(text, window)
+
+    def _compile(self, text, window):
         window.run_command('exec', {
             'cmd': [COFFEE_COMMAND, '--print', '--lint', '--eval', text],
             'quiet': True
@@ -43,3 +49,7 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
             if not region.empty():
                 return True
         return False
+
+    def _setup_exec_panel(self, window):
+        panel = window.get_output_panel("exec")
+        panel.set_syntax_file('Packages/JavaScript/JavaScript.tmLanguage')
