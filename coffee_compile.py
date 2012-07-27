@@ -23,7 +23,7 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         self._setup_exec_panel(window)
 
         if PLATFORM_IS_WINDOWS:
-            text = text.replace('\n', '\\n')
+            text = text.replace('\n', '\r\n')
 
         self._compile(text, window)
 
