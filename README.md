@@ -3,7 +3,6 @@
 This package allows you to compile some or all of your CoffeeScript right from the editor.
 The JavaScript output will even have syntax highlighting!
 
-Please not that Windows is not supported yet.
 
 ##Install
 
