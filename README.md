@@ -27,8 +27,10 @@ Clone this repository from your Sublime packages directory:
 ```
 
 #### Windows (manual install untested)
+```
 $ cd "%APPDATA%\Sublime Text 2"
 $ git clone https://github.com/surjikal/sublime-coffee-compile "Coffee Compile"
+```
 
 
 ##Usage
