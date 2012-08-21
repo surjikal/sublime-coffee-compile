@@ -1,8 +1,8 @@
 import platform
+import subprocess
 
 import sublime_plugin
 import sublime
-import subprocess
 
 PLATFORM_IS_WINDOWS = platform.system() is 'Windows'
 
