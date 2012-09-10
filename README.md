@@ -16,14 +16,14 @@ Clone this repository from your Sublime packages directory:
 
 #### Linux
 ```
-⚡ cd ~/.config/sublime-text-2/Packages
-⚡ git clone https://github.com/surjikal/sublime-coffee-compile "Coffee Compile"
+$ cd ~/.config/sublime-text-2/Packages
+$ git clone https://github.com/surjikal/sublime-coffee-compile "Coffee Compile"
 ```
 
 #### Macosx
 ```
-⚡ cd "~/Library/Application Support/Sublime Text 2/Packages"
-⚡ git clone https://github.com/surjikal/sublime-coffee-compile "Coffee Compile"
+$ cd "~/Library/Application Support/Sublime Text 2/Packages"
+$ git clone https://github.com/surjikal/sublime-coffee-compile "Coffee Compile"
 ```
 
 #### Windows (manual install untested)
