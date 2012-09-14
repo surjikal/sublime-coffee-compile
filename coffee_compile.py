@@ -4,13 +4,27 @@ import subprocess
 import sublime_plugin
 import sublime
 
-PLATFORM_IS_WINDOWS = platform.system() is 'Windows'
+
+PLATFORM = platform.system()
+PLATFORM_IS_WINDOWS = PLATFORM is 'Windows'
+
+CONFIG = {
+    'Darwin': {
+        'executable': '/usr/local/share/npm/lib/node_modules/coffee-script/bin/coffee'
+    },
+    'Windows': {
+        'executable': 'coffee.cmd'
+    },
+    'default': {
+        'executable': 'coffee'
+    }
+}
 
 
 class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
     PANEL_NAME = 'coffeecompile_output'
-    COFFEE_COMMAND = 'coffee.cmd' if PLATFORM_IS_WINDOWS else 'coffee'
+    COFFEE_COMMAND = CONFIG.get(PLATFORM, 'default')['executable']
 
     def run(self, edit):
         text = self._get_text_to_compile()
