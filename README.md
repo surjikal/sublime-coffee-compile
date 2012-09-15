@@ -3,6 +3,12 @@
 This package allows you to compile some or all of your CoffeeScript right from the editor.
 The JavaScript output will even have syntax highlighting!
 
+### Mountain Lions
+There is a known issue with OSX 10.8.1 (i.e. the latest Mountain Lion). It should be fixed soon!
+Please accept this kitten as a small token of apology:
+
+![Kitten Bribe](http://cityrag.com/wp-content/uploads/2012/06/kitten-closeup-1.jpg)
+
 
 ##Install
 
