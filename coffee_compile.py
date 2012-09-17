@@ -1,12 +1,10 @@
-import platform
 import subprocess
 
 import sublime_plugin
 import sublime
 
 
-PLATFORM_IS_WINDOWS = platform.system() is 'Windows'
-
+PLATFORM_IS_WINDOWS = sublime.platform() is 'windows'
 
 class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
@@ -16,13 +14,10 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         text = self._get_text_to_compile()
-        window = self.view.window()
-        
-        javascript, error = self._compile(text, window)
-        self._write_output_to_panel(window, javascript, error)
+        javascript, error = self.compile(text)
+        self.show(javascript or str(error))
 
-
-    def _compile(self, text, window):
+    def compile(self, text):
         args = self._get_coffee_args()
 
         try:
@@ -42,22 +37,16 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
             sublime.status_message(error_message)
             return ('', error_message)
 
-    def _write_output_to_panel(self, window, javascript, error):
-        panel = window.get_output_panel(self.PANEL_NAME)
-        panel.set_syntax_file('Packages/JavaScript/JavaScript.tmLanguage')
+    def show(self, text):
+        window = self.view.window()
+        output = self._get_output()
+        syntax = 'Packages/JavaScript/JavaScript.tmLanguage'
 
-        text = javascript or str(error)
-        self._write_to_panel(panel, text)
+        output.show(window, text, syntax)
 
-        window.run_command('show_panel', {'panel': 'output.%s' % self.PANEL_NAME})
-
-    def _write_to_panel(self, panel, text):
-        panel.set_read_only(False)
-        edit = panel.begin_edit()
-        panel.insert(edit, 0, text)
-        panel.end_edit(edit)
-        panel.sel().clear()
-        panel.set_read_only(True)
+    def _get_output(self):
+        output_name = self.SETTINGS.get('output')
+        return OUTPUT_FROM_SETTINGS_VALUE.get(output_name, 'panel')()
 
     def _get_text_to_compile(self):
         region = self._get_selected_region() if self._editor_contains_selected_text() \
@@ -95,3 +84,53 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
             info.wShowWindow = subprocess.SW_HIDE
             return info
         return None
+
+
+
+class OutputWrapper(object):
+
+    def show(self, window, text, syntax):
+        output = self._get_output(window)
+        output.set_syntax_file(syntax)
+        self._write_to_output(output, text)
+        self._show_output(window)
+
+    def _get_output(self, window):
+        raise NotImplementedError
+
+    def _show_output(self, window):
+        pass
+
+    def _write_to_output(self, output, text):
+        output.set_read_only(False)
+        edit = output.begin_edit()
+        output.insert(edit, 0, text)
+        output.end_edit(edit)
+        output.sel().clear()
+        output.set_read_only(True)
+
+
+class ScratchWindowOutputWrapper(OutputWrapper):
+
+    def _get_output(self, window):
+        output = window.new_file()
+        output.set_scratch(True)
+        output.set_name('CoffeeCompile')
+        return output
+
+
+class PanelOutputWrapper(OutputWrapper):
+
+    PANEL_NAME = 'coffeecompile_output'
+
+    def _get_output(self, window):
+        return window.get_output_panel(self.PANEL_NAME)
+
+    def _show_output(self, window):
+        window.run_command('show_panel', {'panel': 'output.%s' % self.PANEL_NAME})
+
+
+OUTPUT_FROM_SETTINGS_VALUE = {
+    'panel': PanelOutputWrapper,
+    'window': ScratchWindowOutputWrapper
+}
