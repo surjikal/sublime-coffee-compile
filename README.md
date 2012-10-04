@@ -13,6 +13,17 @@ This package assumes that the _coffee_ command is on your path (it probably is).
 configure an explicit path to _coffee_ in the settings file.
 
 
+### Mountain lion users
+
+In order for this plugin to work correctly, you need to set your `PATH` in your `/etc/launchctl.conf` file.
+Make sure that it includes the paths of your `coffee` and `node` executables. Here's how the conf should look:
+
+```
+setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:<node_dir>:<coffee_dir>
+```
+
+See [https://github.com/surjikal/sublime-coffee-compile/issues/9](this issue) for more details.
+
 
 ## Install
 
