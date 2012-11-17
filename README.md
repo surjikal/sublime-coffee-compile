@@ -13,16 +13,21 @@ This package assumes that the _coffee_ command is on your path (it probably is).
 configure an explicit path to _coffee_ in the settings file.
 
 
-### Mountain lion users
+### Common Issues (especially on OSX)
 
-In order for this plugin to work correctly, you need to set your `PATH` in your `/etc/launchctl.conf` file.
-Make sure that it includes the paths of your `coffee` and `node` executables. Here's how the conf should look:
+#### OSError: [Errno 2] No such file or directory
 
-```
-setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:<node_dir>:<coffee_dir>
-```
+This is happening because the plugin can't find `coffee` (or `coffee.cmd` on Windows). To fix this,
+set the `coffee_path` to the executable's directory.
 
-See [https://github.com/surjikal/sublime-coffee-compile/issues/9](this issue) for more details.
+If you don't know where `coffee` is, run the following in your terminal: `dirname ``which coffee```
+
+#### env: node: No such file or directory
+
+This is happening because `coffee` can't find your `node` executable. To fix this, set the `node_path` setting
+to the executable's directory.
+
+If you don't know where `coffee` is, run the following in your terminal: `dirname ``which node```
 
 
 ## Install
@@ -52,20 +57,6 @@ $ git clone https://github.com/surjikal/sublime-coffee-compile "Coffee Compile"
 $ cd "%APPDATA%\Sublime Text 2"
 $ git clone https://github.com/surjikal/sublime-coffee-compile "Coffee Compile"
 ```
-
-
-## Known Issues
-
-### File not found
-
-You will need to specify the path to your _coffee_ executable explicitely in the CoffeeCompile settings.
-
-The setting file can be found in `Sublime Text 2 > Preferences > Package Settings > CoffeeCompile`. The
-`coffee_executable` key lets you specify an explicit path for your _coffee_ executable.
-
-You can find the path of your _coffee_ executable by typing `which coffee` in the terminal.
-Make sure you put the full path and not a symlink, because symlinks don't seem to work.
-
 
 ## Screenshot
 ![CoffeeCompile Screenshot](http://i.imgur.com/2J49Q.png)
