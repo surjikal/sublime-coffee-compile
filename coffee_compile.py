@@ -21,9 +21,8 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         text = self._get_text_to_compile()
         text = text.encode('utf8')
         window = self.view.window()
-        
+
         javascript, error = self._compile(text, window)
-        javascript = javascript.decode('utf8')
         self._write_output_to_panel(window, javascript, error)
 
 
@@ -56,6 +55,7 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         panel.set_syntax_file('Packages/JavaScript/JavaScript.tmLanguage')
 
         text = javascript or str(error)
+        text = text.decode('utf8')
         self._write_to_panel(panel, text)
 
         window.run_command('show_panel', {'panel': 'output.%s' % self.PANEL_NAME})
