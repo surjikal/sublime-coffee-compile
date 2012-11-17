@@ -27,7 +27,7 @@ If you don't know where `coffee` is, run the following in your terminal: ``dirna
 This is happening because `coffee` can't find your `node` executable. To fix this, set the `node_path` setting
 to the executable's directory.
 
-If you don't know where `coffee` is, run the following in your terminal: ``dirname `which node` ``
+If you don't know where `node` is, run the following in your terminal: ``dirname `which node` ``
 
 
 ## Install
