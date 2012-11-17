@@ -30,7 +30,7 @@ If you don't know where `node` is, run the following in your terminal: ``dirname
 ## Install
 
 ### Package Control
-Install the _CoffeeCompile_ package from [http://wbond.net/sublime_packages/package_control](Package Control).
+Install the _CoffeeCompile_ package from [Package Control](http://wbond.net/sublime_packages/package_control).
 
 
 ### Manual
