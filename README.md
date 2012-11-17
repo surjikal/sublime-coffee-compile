@@ -9,9 +9,6 @@ The JavaScript output will even have syntax highlighting!
 Just highlight some CoffeeScript code, right click and select the _Coffee Compile_ command.
 To compile the whole file, don't highlight any text.
 
-This package assumes that the _coffee_ command is on your path (it probably is). You can
-configure an explicit path to _coffee_ in the settings file.
-
 
 ## Common Issues
 
