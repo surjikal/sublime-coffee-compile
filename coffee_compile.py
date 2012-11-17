@@ -16,9 +16,11 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         text = self._get_text_to_compile()
+        text = text.encode('utf8')
         window = self.view.window()
         
         javascript, error = self._compile(text, window)
+        javascript = javascript.decode('utf8')
         self._write_output_to_panel(window, javascript, error)
 
 
