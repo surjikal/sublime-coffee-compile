@@ -13,7 +13,7 @@ This package assumes that the _coffee_ command is on your path (it probably is).
 configure an explicit path to _coffee_ in the settings file.
 
 
-## Common Issues (especially on OSX)
+## Common Issues
 
 ### OSError: [Errno 2] No such file or directory
 
