@@ -1,9 +1,22 @@
 {
     /**
+     * Where your `node` executable lives. If this is not specified, then
+     * it is expected to be on Sublime's path.
+     */
+     "coffee_path": ""
+
+    /**
+     * Where your `node` executable lives. If this is not specified, then
+     * it is expected to be on Sublime's path.
+     */
+,    "node_path": ""
+
+    /**
      * How should the plugin invoke your coffee executable.
      *
      * This can be the name of the executable if its in your path,
-     * or it can be the absolute path to it.
+     * or it can be the absolute path to it (although in that case,
+     * try to use the `coffee_path` setting).
      *
      * You can find where your executable is by running "which coffee"
      * in your terminal.
@@ -12,7 +25,7 @@
      *   Windows   -> 'coffee.cmd'
      *   Linux/OSX -> 'coffee'
      */
-    "coffee_executable": ""
+,    "coffee_executable": ""
 
 
     /**
