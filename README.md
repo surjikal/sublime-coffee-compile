@@ -13,16 +13,16 @@ This package assumes that the _coffee_ command is on your path (it probably is).
 configure an explicit path to _coffee_ in the settings file.
 
 
-### Common Issues (especially on OSX)
+## Common Issues (especially on OSX)
 
-#### OSError: [Errno 2] No such file or directory
+### OSError: [Errno 2] No such file or directory
 
 This is happening because the plugin can't find `coffee` (or `coffee.cmd` on Windows). To fix this,
 set the `coffee_path` to the executable's directory.
 
 If you don't know where `coffee` is, run the following in your terminal: ``dirname `which coffee` ``
 
-#### env: node: No such file or directory
+### env: node: No such file or directory
 
 This is happening because `coffee` can't find your `node` executable. To fix this, set the `node_path` setting
 to the executable's directory.
