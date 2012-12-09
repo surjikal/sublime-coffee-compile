@@ -86,6 +86,14 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         return False
 
     def _get_coffee_args(self):
+        if self.SETTINGS.get('coffee_script_redux'):
+            print "[CoffeeCompile] Using coffee script redux."
+            return self._get_redux_coffee_args()
+        else:
+            print "[CoffeeCompile] Using vanilla compiler."
+            return self._get_vanilla_coffee_args()
+
+    def _get_vanilla_coffee_args(self):
         coffee_executable = self._get_coffee_executable()
 
         args = [coffee_executable, '--stdio', '--print', '--lint']
@@ -94,6 +102,10 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
             args.append('--bare')
 
         return args
+
+    def _get_redux_coffee_args(self):
+        coffee_executable = self._get_coffee_executable()
+        return [coffee_executable, '--js']
 
     def _get_coffee_executable(self):
         return self.SETTINGS.get('coffee_executable') or self.DEFAULT_COFFEE_EXECUTABLE
@@ -108,12 +120,20 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
     def _get_path(self):
         node_path   = self.SETTINGS.get('node_path')
-        coffee_path = self.SETTINGS.get('coffee_path')
-
+        coffee_path = self._get_coffee_path()
         path = os.environ.get('PATH', '').split(':')
+
         if node_path:
             path.append(node_path)
         if coffee_path:
             path.append(coffee_path)
 
         return ":".join(path)
+
+    def _get_coffee_path(self):
+        coffee_path = self.SETTINGS.get('coffee_path')
+
+        if self.SETTINGS.get('coffee_script_redux'):
+            return self.SETTINGS.get('redux_coffee_path') or coffee_path
+
+        return coffee_path

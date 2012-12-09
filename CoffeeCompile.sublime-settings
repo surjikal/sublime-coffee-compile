@@ -33,4 +33,17 @@
      */
 ,   "bare": false
 
+
+    /**
+     * Enables support for the CoffeeScriptRedux compiler. Experimental feature!
+     */
+,   "coffee_script_redux": false
+
+
+    /**
+     * The location of your CoffeeScriptRedux compiler. This option does nothing
+     * if the `coffee_script_redux` flag is off.
+     */
+,   "redux_coffee_path": ""
+
 }
