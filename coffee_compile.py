@@ -25,11 +25,11 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         javascript, error = self._compile(text, window)
         self._write_output_to_panel(window, javascript, error)
 
-
     def _compile(self, text, window):
+        path = self._get_path()
+        args = self._get_coffee_args()
+        print "[CoffeeCompile] Using PATH=%s" % path
         try:
-            path = self._get_path()
-            args = self._get_coffee_args()
             return self._execute_command(args, text, path)
         except OSError as e:
             error_message = 'CoffeeCompile error: '
@@ -89,6 +89,7 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         coffee_executable = self._get_coffee_executable()
 
         args = [coffee_executable, '--stdio', '--print', '--lint']
+
         if self.SETTINGS.get('bare'):
             args.append('--bare')
 
@@ -106,11 +107,13 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         return None
 
     def _get_path(self):
-        node_path = self.SETTINGS.get('node_path')
+        node_path   = self.SETTINGS.get('node_path')
         coffee_path = self.SETTINGS.get('coffee_path')
+
         path = os.environ.get('PATH', '').split(':')
         if node_path:
             path.append(node_path)
         if coffee_path:
             path.append(coffee_path)
-        os.environ['PATH'] = ":".join(path)
+
+        return ":".join(path)
