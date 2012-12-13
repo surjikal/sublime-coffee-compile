@@ -46,6 +46,7 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         # https://github.com/surjikal/sublime-coffee-compile/issues/13
         if path and PLATFORM_IS_WINDOWS:
             os.environ['PATH'] = path
+            path = None
 
         env = {'PATH': path} if path else None
         process = subprocess.Popen(args,
