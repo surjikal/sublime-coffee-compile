@@ -41,6 +41,12 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
             return ('', error_message)
 
     def _execute_command(self, args, text, path=None):
+
+        # This is needed for Windows... not sure why. See:
+        # https://github.com/surjikal/sublime-coffee-compile/issues/13
+        if path and PLATFORM_IS_WINDOWS:
+            os.environ['PATH'] = path
+
         env = {'PATH': path} if path else None
         process = subprocess.Popen(args,
             stdin=subprocess.PIPE,
@@ -121,6 +127,7 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
     def _get_path(self):
         node_path   = self.SETTINGS.get('node_path')
         coffee_path = self._get_coffee_path()
+
         path = os.environ.get('PATH', '').split(':')
 
         if node_path:
