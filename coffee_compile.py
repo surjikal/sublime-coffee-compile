@@ -13,11 +13,14 @@ PLATFORM_IS_OSX     = PLATFORM is 'Darwin'
 
 class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
+    edit = None
+
     PANEL_NAME = 'coffeecompile_output'
     DEFAULT_COFFEE_EXECUTABLE = 'coffee.cmd' if PLATFORM_IS_WINDOWS else 'coffee'
     SETTINGS = sublime.load_settings("CoffeeCompile.sublime-settings")
 
     def run(self, edit):
+        self.edit = edit
         text = self._get_text_to_compile()
         text = text.encode('utf8')
         window = self.view.window()
@@ -69,9 +72,8 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
     def _write_to_panel(self, panel, text):
         panel.set_read_only(False)
-        edit = panel.begin_edit()
-        panel.insert(edit, 0, text)
-        panel.end_edit(edit)
+        panel.insert(self.edit, 0, text)
+        panel.end_edit(self.edit)
         panel.sel().clear()
         panel.set_read_only(True)
 
