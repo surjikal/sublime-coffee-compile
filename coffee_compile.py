@@ -28,7 +28,7 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
     def _compile(self, text, window):
         path = self._get_path()
         args = self._get_coffee_args()
-        print "[CoffeeCompile] Using PATH=%s" % path
+        print("[CoffeeCompile] Using PATH=%s" % path)
         try:
             return self._execute_command(args, text, path)
         except OSError as e:
@@ -94,10 +94,10 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
     def _get_coffee_args(self):
         if self.SETTINGS.get('coffee_script_redux'):
-            print "[CoffeeCompile] Using coffee script redux."
+            print("[CoffeeCompile] Using coffee script redux.")
             return self._get_redux_coffee_args()
         else:
-            print "[CoffeeCompile] Using vanilla compiler."
+            print("[CoffeeCompile] Using vanilla compiler.")
             return self._get_vanilla_coffee_args()
 
     def _get_vanilla_coffee_args(self):
