@@ -3,13 +3,10 @@
 This package allows you to compile some or all of your CoffeeScript right from the editor.
 The JavaScript output will even have syntax highlighting!
 
-
-##Usage
-
 Just highlight some CoffeeScript code, right click and select the _Coffee Compile_ command.
 To compile the whole file, don't highlight any text.
 
-## Screenshot
+
 ![CoffeeCompile Screenshot](http://i.imgur.com/2J49Q.png)
 
 
