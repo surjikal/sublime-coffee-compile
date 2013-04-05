@@ -1,13 +1,19 @@
 {
     /**
-     * Where your `node` executable lives. If this is not specified, then
+     * Where your `coffee` executable lives. If this is not specified, then
      * it is expected to be on Sublime's path.
+     *
+     * On OSX, for example:
+     * `/usr/local/share/npm/lib/node_modules/coffee-script/bin`
      */
      "coffee_path": ""
 
     /**
      * Where your `node` executable lives. If this is not specified, then
      * it is expected to be on Sublime's path.
+     *
+     * On OSX, for example:
+     * `/usr/local/bin`
      */
 ,    "node_path": ""
 
