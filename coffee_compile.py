@@ -112,7 +112,7 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
     def _get_vanilla_coffee_args(self):
         coffee_executable = self._get_coffee_executable()
 
-        args = [coffee_executable, '--stdio', '--print', '--lint']
+        args = [coffee_executable, '--stdio', '--print']
 
         if SETTINGS.get('bare'):
             args.append('--bare')
