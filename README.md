@@ -1,4 +1,4 @@
-#Sublime Text 2 - Coffee Compile
+#Sublime Text 2/3 - Coffee Compile
 
 This package allows you to compile some or all of your CoffeeScript right from the editor.
 The JavaScript output will even have syntax highlighting!
