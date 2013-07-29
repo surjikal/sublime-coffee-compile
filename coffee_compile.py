@@ -7,7 +7,6 @@ import sublime_plugin
 import sublime
 
 
-SETTINGS = sublime.load_settings("CoffeeCompile.sublime-settings")
 
 PLATFORM = platform.system()
 PLATFORM_IS_WINDOWS = PLATFORM is 'Windows'
@@ -20,6 +19,8 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
     DEFAULT_COFFEE_EXECUTABLE = 'coffee.cmd' if PLATFORM_IS_WINDOWS else 'coffee'
 
     def run(self, edit):
+        self.settings = sublime.load_settings("CoffeeCompile.sublime-settings")
+
         coffeescript = self._get_text_to_compile()
         coffeescript = coffeescript.encode('utf8')
         window = self.view.window()
@@ -102,7 +103,7 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         return False
 
     def _get_coffee_args(self):
-        if SETTINGS.get('coffee_script_redux'):
+        if self.settings.get('coffee_script_redux'):
             self._log("Using coffee script redux.")
             return self._get_redux_coffee_args()
         else:
@@ -114,7 +115,7 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
         args = [coffee_executable, '--stdio', '--print', '--lint']
 
-        if SETTINGS.get('bare'):
+        if self.settings.get('bare'):
             args.append('--bare')
 
         return args
@@ -124,7 +125,7 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         return [coffee_executable, '--js']
 
     def _get_coffee_executable(self):
-        return SETTINGS.get('coffee_executable') or self.DEFAULT_COFFEE_EXECUTABLE
+        return self.settings.get('coffee_executable') or self.DEFAULT_COFFEE_EXECUTABLE
 
     def _get_startupinfo(self):
         if PLATFORM_IS_WINDOWS:
@@ -135,7 +136,7 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         return None
 
     def _get_path(self):
-        node_path   = SETTINGS.get('node_path')
+        node_path   = self.settings.get('node_path')
         coffee_path = self._get_coffee_path()
 
         path = os.environ.get('PATH', '').split(':')
@@ -148,10 +149,10 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         return ":".join(path)
 
     def _get_coffee_path(self):
-        coffee_path = SETTINGS.get('coffee_path')
+        coffee_path = self.settings.get('coffee_path')
 
-        if SETTINGS.get('coffee_script_redux'):
-            return SETTINGS.get('redux_coffee_path') or coffee_path
+        if self.settings.get('coffee_script_redux'):
+            return self.settings.get('redux_coffee_path') or coffee_path
 
         return coffee_path
 
