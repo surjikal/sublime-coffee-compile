@@ -9,8 +9,7 @@ import sublime
 
 
 PLATFORM = sublime.platform()
-PLATFORM_IS_WINDOWS = PLATFORM is 'windows'
-PLATFORM_IS_OSX     = PLATFORM is 'osx'
+PLATFORM_IS_WINDOWS = (PLATFORM == 'windows')
 
 IS_SUBLIME_TEXT_2 = int(sublime.version()) < 3000
 
@@ -179,7 +178,7 @@ class SublimeTextOutputPanel:
 
     def write(self, text, edit=None):
         self._panel.set_read_only(False)
-        if IS_SUBLIME_TEXT_2 or PLATFORM_IS_WINDOWS:
+        if IS_SUBLIME_TEXT_2:
             if not edit:
                 edit = self._panel.begin_edit()
             self._panel.insert(edit, 0, text)
