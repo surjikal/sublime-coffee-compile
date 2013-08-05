@@ -1,15 +1,15 @@
-#Sublime Text 2/3 - Coffee Compile
+# Sublime Text 2/3 - Coffee Compile
 
 This package allows you to compile some or all of your CoffeeScript right from the editor.
 The JavaScript output will even have syntax highlighting!
 
 To use this thing, highlight your CoffeeScript and hit `Ctrl+Shift+C` (or `Cmd+Shift+C` on OSX).<br>
-Alternatively, right click and select the _Coffee Compile_ command.
+Alternatively, right click and select the _Coffee Compile_ command. To compile the whole file, don't
+highlight any text.
 
-To compile the whole file, don't highlight any text.
-
-You'll probably need to setup some paths in the settings file before you can use the plugin.<br>
-The settings file can be accessed through this menu: `Preferences > Package Settings > CoffeeCompile > Settings - User`
+You'll probably need to setup some paths in the settings file before you can use the plugin. The settings
+file can be accessed through this menu:
+`Sublime Text > Preferences > Package Settings > CoffeeCompile > Settings - User`
 
 
 ![CoffeeCompile Screenshot](http://i.imgur.com/2J49Q.png)
@@ -20,14 +20,14 @@ The settings file can be accessed through this menu: `Preferences > Package Sett
 ### OSError: [Errno 2] No such file or directory
 
 This is happening because the plugin can't find `coffee` (or `coffee.cmd` on Windows). To fix this,
-set the `coffee_path` to the executable's directory.
+go in the settings file and set the `coffee_path` to the executable's directory.
 
 If you don't know where `coffee` is, run the following in your terminal: ``dirname `which coffee` ``
 
 ### env: node: No such file or directory
 
-This is happening because `coffee` can't find your `node` executable. To fix this, set the `node_path` setting
-to the executable's directory.
+This is happening because `coffee` can't find your `node` executable. To fix this, go in the settings
+file and set the `node_path` setting to the executable's directory.
 
 If you don't know where `node` is, run the following in your terminal: ``dirname `which node` ``
 
