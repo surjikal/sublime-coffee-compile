@@ -3,8 +3,13 @@
 This package allows you to compile some or all of your CoffeeScript right from the editor.
 The JavaScript output will even have syntax highlighting!
 
-Just highlight some CoffeeScript code, right click and select the _Coffee Compile_ command.
+To use this thing, highlight your CoffeeScript and hit `Ctrl+Shift+C` (or `Cmd+Shift+C` on OSX).<br>
+Alternatively, right click and select the _Coffee Compile_ command.
+
 To compile the whole file, don't highlight any text.
+
+You'll probably need to setup some paths in the settings file before you can use the plugin.<br>
+The settings file can be accessed through this menu: `Preferences > Package Settings > CoffeeCompile > Settings - User`
 
 
 ![CoffeeCompile Screenshot](http://i.imgur.com/2J49Q.png)
