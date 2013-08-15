@@ -5,8 +5,8 @@ The JavaScript output will even have syntax highlighting!
 
 To install CoffeeCompile, simply use [Package Control](http://wbond.net/sublime_packages/package_control).
 
-You'll probably need to setup some paths in the settings file before you can use the plugin. The settings
-file can be accessed through this menu:
+You'll need to setup some paths in the settings file before you can use the plugin. Instructions are
+included in the settings file, don't worry! The settings file can be accessed through this menu:
 `Sublime Text > Preferences > Package Settings > CoffeeCompile > Settings - User`
 
 To use the plugin, highlight your CoffeeScript and hit `Ctrl+Shift+C` (or `Cmd+Shift+C` on OSX).<br>
