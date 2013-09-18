@@ -1,7 +1,13 @@
 {
     /**
-     * Where your `coffee` executable lives. If this is not specified, then
-     * it is expected to be on Sublime's path.
+     * RECOMMENDED
+     *
+     * Where your `coffee` executable lives.
+     *
+     * If this is not specified, then the plugin will use nodejs' `require`
+     * function to load coffee-script. So unless you specify a path to your
+     * `coffee` explicitly, you'll only  be able to run this plugin in files
+     * that can find the `coffee-script` module.
      *
      * On OSX, for example:
      * `/usr/local/share/npm/lib/node_modules/coffee-script/bin`
@@ -9,6 +15,8 @@
      "coffee_path": ""
 
     /**
+     * REQUIRED
+     *
      * Where your `node` executable lives. If this is not specified, then
      * it is expected to be on Sublime's path.
      *
@@ -18,6 +26,8 @@
 ,    "node_path": ""
 
     /**
+     * OPTIONAL
+     *
      * How should the plugin invoke your coffee executable.
      *
      * This can be the name of the executable if its in your path,
@@ -38,18 +48,5 @@
      * Compile without a top-level function wrapper.
      */
 ,   "bare": false
-
-
-    /**
-     * Enables support for the CoffeeScriptRedux compiler. Experimental feature!
-     */
-,   "coffee_script_redux": false
-
-
-    /**
-     * The location of your CoffeeScriptRedux compiler. This option does nothing
-     * if the `coffee_script_redux` flag is off.
-     */
-,   "redux_coffee_path": ""
 
 }
