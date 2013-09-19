@@ -41,7 +41,7 @@ class CoffeeCompilerModule(CoffeeCompiler):
         self.cwd = cwd
 
     def compile(self, coffeescript, options={}):
-        bootstrap  = self._get_bootstrap_script(coffeescript, options)
+        bootstrap  = self._get_bootstrap_script(options)
         javascript = self._execute(
             args=['node', '-e', bootstrap]
           , coffeescript=coffeescript
@@ -52,7 +52,7 @@ class CoffeeCompilerModule(CoffeeCompiler):
             raise CoffeeModuleNotFoundError(self.path, javascript, require_search_paths)
         return javascript
 
-    def _get_bootstrap_script(self, coffeescript, options={}):
+    def _get_bootstrap_script(self, options={}):
         return """
         var coffee = require('coffee-script');
         var buffer = "";
@@ -64,7 +64,6 @@ class CoffeeCompilerModule(CoffeeCompiler):
     def _get_require_search_paths(self):
         return self._execute(
             args=['node', '-e', "console.log(module.paths)"]
-          , coffeescript=coffeescript
           , cwd=self.cwd
         )
 
