@@ -4,10 +4,10 @@ except ImportError: import json as JSON
 
 try:
     from .execute import execute
-    from .exceptions import CoffeeCompilationUnknownError, CoffeeModuleNotFoundError, CoffeeExecutableNotFoundError
+    from .exceptions import CoffeeCompilationUnknownError, CoffeeCompilationOSError, CoffeeModuleNotFoundError, CoffeeExecutableNotFoundError
 except ValueError:
     from execute import execute
-    from exceptions import CoffeeCompilationUnknownError, CoffeeModuleNotFoundError, CoffeeExecutableNotFoundError
+    from exceptions import CoffeeCompilationUnknownError, CoffeeCompilationOSError, CoffeeModuleNotFoundError, CoffeeExecutableNotFoundError
 
 
 class CoffeeCompiler(object):
