@@ -55,6 +55,28 @@ class CoffeeCompilationOSError(CoffeeCompilationError):
         )
 
 
+class CoffeeCompilationCompilerNotFoundError(CoffeeCompilationError):
+
+    def __init__(self):
+        message = "Couldn't compile your coffee... can't find your coffee compiler!\n\n"
+
+        details  = "I can't use the nodejs/module-based compiler because you editing an"
+        details += "unsaved file and thus don't have a current working directory.\n\n"
+
+        details += "You probably want to use the `coffee_path` setting, since it lets you"
+        details += "explicitly set a path to your coffee script compiler.\n\n"
+
+        details += "To configure CoffeeCompile and the `coffee_path` setting, go to:\n"
+        details += "`Preferences > Package Settings > CoffeeCompile > Settings - User`"
+
+        super(CoffeeCompilationCompilerNotFoundError, self).__init__(
+            path=''
+          , message=message
+          , details=details
+        )
+
+
+
 class CoffeeModuleNotFoundError(CoffeeCompilationError):
     def __init__(self, path, details, require_search_paths):
         message  = "NodeJS cannot find your `coffee-script` module.\n\n\n"

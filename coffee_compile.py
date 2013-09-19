@@ -6,12 +6,12 @@ import sublime
 
 try:
     from .lib.compilers import CoffeeCompilerModule, CoffeeCompilerExecutableVanilla
-    from .lib.exceptions import CoffeeCompilationError
+    from .lib.exceptions import CoffeeCompilationError, CoffeeCompilationCompilerNotFoundError
     from .lib.sublime_utils import SublimeTextOutputPanel, SublimeTextEditorView
     from .lib.utils import log
 except ValueError:
     from lib.compilers import CoffeeCompilerModule, CoffeeCompilerExecutableVanilla
-    from lib.exceptions import CoffeeCompilationError
+    from lib.exceptions import CoffeeCompilationError, CoffeeCompilationCompilerNotFoundError
     from lib.sublime_utils import SublimeTextOutputPanel, SublimeTextEditorView
     from lib.utils import log
 
@@ -65,7 +65,13 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
             self._write_compile_error_to_panel(e, edit)
 
     def _compile(self, coffeescript):
-        self.settings.set('cwd', os.path.dirname(self.view.file_name()))
+        filename = self.view.file_name()
+
+        if filename:
+            self.settings.set('cwd', os.path.dirname(filename))
+        elif not self.settings.get('coffee_path', None):
+            raise CoffeeCompilationCompilerNotFoundError()
+
         (compiler, options) = settings_adapter(self.settings)
         return compiler.compile(coffeescript, options)
 
