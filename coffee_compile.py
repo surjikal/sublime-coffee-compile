@@ -1,4 +1,5 @@
 import os
+import traceback
 
 import sublime_plugin
 import sublime
@@ -17,28 +18,35 @@ except ValueError:
 
 
 DEFAULT_COFFEE_CMD = 'coffee.cmd' if sublime.platform() is 'windows' else 'coffee'
+DEFAULT_COMPILER = 'vanilla-executable'
 
 
-# if we have a `coffee_path` setting set, then we use the executable-
-# based compiler. Otherwise, we use the module-based one.
 def settings_adapter(settings):
 
-    def get_compiler():
-        node_path   = settings.get('node_path')
-        coffee_path = settings.get('coffee_path')
+    node_path = settings.get('node_path')
 
-        # We are using an executable-based compiler
-        if bool(coffee_path):
-            coffee_executable = settings.get('coffee_executable') or DEFAULT_COFFEE_CMD
-            return CoffeeCompilerExecutableVanilla(
-                node_path
-              , coffee_path
-              , coffee_executable
-            )
-        # We are using a module-based compiler
+    def get_executable_compiler():
+        coffee_executable = settings.get('coffee_executable') or DEFAULT_COFFEE_CMD
+        coffee_path = settings.get('coffee_path')
+        print(coffee_path)
+        return CoffeeCompilerExecutableVanilla(
+            node_path
+          , coffee_path
+          , coffee_executable
+        )
+
+    def get_module_compiler():
+        cwd = settings.get('cwd')
+        return CoffeeCompilerModule(node_path, cwd)
+
+    def get_compiler():
+        compiler = settings.get('compiler') or DEFAULT_COMPILER
+        if compiler == 'vanilla-executable':
+            return get_executable_compiler()
+        elif compiler == 'vanilla-module':
+            return get_module_compiler()
         else:
-            cwd = settings.get('cwd')
-            return CoffeeCompilerModule(node_path, cwd)
+            raise InvalidCompilerSettingError(compiler)
 
     # (compiler, options)
     return (get_compiler(), {
@@ -62,6 +70,12 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
             javascript = self._compile(coffeescript)
             self._write_javascript_to_panel(javascript, edit)
         except CoffeeCompilationError as e:
+            self._write_compile_error_to_panel(e, edit)
+        except InvalidCompilerSettingError as e:
+            e = CoffeeCompilationError(path='', message=str(e), details='')
+            self._write_compile_error_to_panel(e, edit)
+        except Exception as e:
+            e = CoffeeCompilationError(path='', message="Unexpected Exception!", details=traceback.format_exc())
             self._write_compile_error_to_panel(e, edit)
 
     def _compile(self, coffeescript):
@@ -87,3 +101,18 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         panel = self._create_panel()
         panel.set_syntax_file('Packages/Markdown/Markdown.tmLanguage')
         panel.display(str(error), edit)
+
+
+class InvalidCompilerSettingError(Exception):
+    def __init__(self, compiler):
+        self.compiler = compiler
+        self.available_compilers = [
+            'vanilla-executable',
+            'vanilla-module'
+        ]
+    def __str__(self):
+        message = "Compiler `%s` is not a valid compiler setting choice.\n\n" % self.compiler
+        message+= "Available choices are:\n\n- "
+        message+= "\n- ".join(self.available_compilers)
+        message+= "\n"
+        return message

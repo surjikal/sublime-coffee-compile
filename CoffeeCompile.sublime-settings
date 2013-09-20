@@ -1,18 +1,26 @@
 {
     /**
-     * RECOMMENDED
+     * REQUIRED
      *
-     * Where your `coffee` executable lives.
+     * The type of compiler you want to use. The `executable` compiler is
+     * the recommended choice.
      *
-     * If this is not specified, then the plugin will use nodejs' `require`
-     * function to load coffee-script. So unless you specify a path to your
-     * `coffee` explicitly, you'll only  be able to run this plugin in files
-     * that can find the `coffee-script` module.
+     * Choices are:
      *
-     * On OSX, for example:
-     * `/usr/local/share/npm/lib/node_modules/coffee-script/bin`
+     * 1. vanilla-executable
+     *
+     *    Use your `coffee` executable. If this option is selected, you must
+     *    set the `coffee_path` setting.
+     *
+     *
+     * 2. vanilla-module
+     *
+     *    This will the `coffee-script` NodeJS module. Node will try to find
+     *    the module based on the working directory of the file you're editing.
+     *
      */
-     "coffee_path": ""
+     "compiler": "vanilla-executable"
+
 
     /**
      * REQUIRED
@@ -24,6 +32,18 @@
      * `/usr/local/bin`
      */
 ,    "node_path": ""
+
+
+    /**
+     * REQUIRED ONLY IF USING `executable` COMPILER
+     *
+     * Where your `coffee` executable lives.
+     *
+     * On OSX, for example:
+     * `/usr/local/share/npm/lib/node_modules/coffee-script/bin`
+     */
+,    "coffee_path": ""
+
 
     /**
      * OPTIONAL

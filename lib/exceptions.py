@@ -58,12 +58,12 @@ class CoffeeCompilationOSError(CoffeeCompilationError):
 class CoffeeCompilationCompilerNotFoundError(CoffeeCompilationError):
 
     def __init__(self):
-        message = "Couldn't compile your coffee... can't find your coffee compiler!\n\n"
+        message = "Couldn't compile your coffee... can't find your coffee compiler!"
 
-        details  = "I can't use the nodejs/module-based compiler because you editing an"
-        details += "unsaved file and thus don't have a current working directory.\n\n"
+        details  = "CoffeeCompile can't use the nodejs/module-based compiler because you're\n"
+        details += "editing an unsaved file, and therefore don't have a current working directory.\n\n"
 
-        details += "You probably want to use the `coffee_path` setting, since it lets you"
+        details += "You probably want to use the `coffee_path` setting, since it lets you\n"
         details += "explicitly set a path to your coffee script compiler.\n\n"
 
         details += "To configure CoffeeCompile and the `coffee_path` setting, go to:\n"
@@ -94,7 +94,7 @@ class CoffeeModuleNotFoundError(CoffeeCompilationError):
 
 class CoffeeExecutableNotFoundError(CoffeeCompilationError):
     def __init__(self, path, details):
-        message  = "`coffee` couldn't find NodeJS `coffee`.\n"
+        message  = "Your `coffee` executable couldn't find NodeJS in his path.\n"
         message += "Your `node_path` setting is probably not configured properly.\n\n"
         message += "To configure CoffeeCompile, go to:\n"
         message += "`Preferences > Package Settings > CoffeeCompile > Settings - User`"
