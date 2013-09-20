@@ -26,7 +26,7 @@ def execute(args, message='', path=None, cwd=None):
         env=env,
         cwd=cwd)
 
-    output, error = process.communicate(message)
+    output, error = process.communicate(message.encode('utf-8'))
 
     if output:
         output = output.decode('utf8')
