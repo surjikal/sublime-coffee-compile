@@ -17,7 +17,8 @@ except ValueError:
     from lib.utils import log
 
 
-DEFAULT_COFFEE_CMD = 'coffee.cmd' if sublime.platform() is 'windows' else 'coffee'
+PLATFORM_IS_WINDOWS = (sublime.platform() == 'windows')
+DEFAULT_COFFEE_CMD = 'coffee.cmd' if PLATFORM_IS_WINDOWS else 'coffee'
 DEFAULT_COMPILER = 'vanilla-executable'
 
 
