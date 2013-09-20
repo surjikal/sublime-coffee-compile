@@ -10,12 +10,13 @@ PLATFORM_IS_WINDOWS = (sublime.platform() == 'windows')
 def execute(args, message='', path=None, cwd=None):
     # This is needed for Windows... not sure why. See:
     # https://github.com/surjikal/sublime-coffee-compile/issues/13
+    if path:
+        path = os.pathsep.join(path)
+        if PLATFORM_IS_WINDOWS:
+            os.environ['PATH'] = path
+            path = None
 
-    if path and PLATFORM_IS_WINDOWS:
-        os.environ['PATH'] = path
-        path = None
-
-    env = {'PATH': os.pathsep.join(path)} if path else None
+    env = {'PATH': path} if path else None
 
     process = subprocess.Popen(args,
         stdin=subprocess.PIPE,
