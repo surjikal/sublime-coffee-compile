@@ -102,6 +102,10 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
         panel = self._create_panel()
         panel.set_syntax_file('Packages/Markdown/Markdown.tmLanguage')
         panel.display(str(error), edit)
+    
+    def is_visible(self):
+        return self.view.settings().get('syntax').endswith("CoffeeScript.tmLanguage")
+
 
 
 class InvalidCompilerSettingError(Exception):
