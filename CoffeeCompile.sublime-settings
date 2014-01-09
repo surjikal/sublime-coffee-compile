@@ -7,7 +7,7 @@
      *
      * Choices are:
      *
-     * 1. vanilla-executable
+     * 1. vanilla-executable (default)
      *
      *    Use your `coffee` executable. If this option is selected, you must
      *    set the `coffee_path` setting.
@@ -46,8 +46,6 @@
 
 
     /**
-     * OPTIONAL
-     *
      * How should the plugin invoke your coffee executable.
      *
      * This can be the name of the executable if its in your path,
@@ -66,7 +64,31 @@
 
     /**
      * Compile without a top-level function wrapper.
+     *
+     * Defaults to `false`.
      */
-,   "bare": false
+,   "bare": true
 
+
+     /**
+      * Show the CoffeeCompile right+click menu option for files of
+      * these types.
+      *
+      * If the list is empty, the menu option will always be shown.
+      *
+      *
+      * If you want to figure out the path to syntax file for a certain
+      * filetype, do the following:
+      *
+      * 1. Open a new file.
+      * 2. Hit `ctrl/cmd + shift + P` and set the syntax you want.
+      * 3. Open the sublime console by pressing `ctrl/cmd + ~`.
+      * 4. Execute `view.settings().get('syntax')` and copy paste the
+      *    output here.
+      *
+      */
+,    "syntax_patterns": [
+          "Packages/CoffeeScript/CoffeeScript.tmLanguage"
+     ,    "Packages/Text/Plain text.tmLanguage"
+     ]
 }
