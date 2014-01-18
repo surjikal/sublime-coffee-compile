@@ -60,12 +60,16 @@ def settings_adapter(settings):
     }
 
 
+def loadSettings():
+    return sublime.load_settings("CoffeeCompile.sublime-settings")
+
+
 class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
     PANEL_NAME = 'coffeecompile_output'
 
     def run(self, edit):
-        self.settings = sublime.load_settings("CoffeeCompile.sublime-settings")
+        self.settings = loadSettings()
         self.window   = self.view.window()
         self.editor   = SublimeTextEditorView(self.view)
 
@@ -86,7 +90,8 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
             self._write_compile_error_to_panel(e, edit)
 
     def is_visible(self):
-        syntax_patterns = settings_adapter(self.settings)['options']['syntax_patterns']
+        settings = loadSettings()
+        syntax_patterns = settings_adapter(settings)['options']['syntax_patterns']
         current_syntax  = self.view.settings().get('syntax')
         return len(syntax_patterns) == 0 or current_syntax in syntax_patterns
 
