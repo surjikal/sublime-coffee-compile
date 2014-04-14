@@ -15,7 +15,7 @@ highlight any text.
 
 
 ![CoffeeCompile Screenshot](http://i.imgur.com/2J49Q.png)
-
+Color Scheme: [Made of Code](http://madeofcode.com/posts/29-photo-my-new-textmate-theme-8220-made-of-code-8221-mdash-download-9-feb-2010-update-t)
 
 ## Common Issues
 
