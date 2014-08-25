@@ -89,8 +89,9 @@
       */
 ,    "syntax_patterns": [
           "Packages/CoffeeScript/CoffeeScript.tmLanguage"
+     ,    "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage"
      ,    "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
      ,    "Packages/Text/Plain text.tmLanguage"
-     
+
      ]
 }
