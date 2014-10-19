@@ -30,7 +30,7 @@ class CoffeeCompiler(object):
 
     def _get_path(self):
         path = os.environ.get('PATH', '').split(os.pathsep)
-        if self.node_path: path.append(self.node_path)
+        if self.node_path: path.insert(0, self.node_path)
         return path
 
 
@@ -92,7 +92,7 @@ class CoffeeCompilerExecutable(CoffeeCompiler):
 
     def _get_path(self):
         path = CoffeeCompiler._get_path(self)
-        if self.coffee_path: path.append(self.coffee_path)
+        if self.coffee_path: path.insert(0, self.coffee_path)
         return path
 
 
