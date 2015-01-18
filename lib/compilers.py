@@ -71,6 +71,7 @@ class CoffeeCompilerModule(CoffeeCompiler):
         return 'null'
         return JSON.dumps({
             'bare': options.get('bare', False)
+          , 'literate': options.get('literate', False)
         })
 
 
@@ -107,4 +108,5 @@ class CoffeeCompilerExecutableVanilla(CoffeeCompilerExecutable):
     def _options_to_args(self, options):
         args = ['--stdio', '--print']
         if options.get('bare'): args.append('--bare')
+        if options.get('literate'): args.append('--literate')
         return args
