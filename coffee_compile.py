@@ -78,6 +78,8 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
         try:
             [compiler, options] = settings_adapter(self.settings)['compiler']
+            # Literate option does not depend on settings, but on the files syntax (must be a literate tmLanguage)
+            options['literate'] = 'literate' in self.view.settings().get('syntax').lower()
             javascript = self._compile(coffeescript, compiler, options)
             self._write_javascript_to_panel(javascript, edit)
         except CoffeeCompilationError as e:
