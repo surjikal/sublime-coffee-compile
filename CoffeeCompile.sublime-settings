@@ -92,6 +92,13 @@
      ,    "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
      ,    "Packages/Better CoffeeScript/CoffeeScript_Literate.tmLanguage"
      ,    "Packages/Text/Plain text.tmLanguage"
-     
+
      ]
+
+     /**
+      * Path to the file used for syntax highlighting the compiled output pane.
+      *
+      * e.g. "Packages/Better JavaScript/JavaScript.tmLanguage" if you use Better JavaScript
+      */
+,    "syntax_file_js": "Packages/JavaScript/JavaScript.tmLanguage"
 }

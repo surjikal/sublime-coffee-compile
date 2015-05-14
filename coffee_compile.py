@@ -112,7 +112,12 @@ class CoffeeCompileCommand(sublime_plugin.TextCommand):
 
     def _write_javascript_to_panel(self, javascript, edit):
         panel = self._create_panel()
-        panel.set_syntax_file('Packages/JavaScript/JavaScript.tmLanguage')
+
+        syntaxFileJS = self.settings.get('syntax_file_js', None)
+        if not syntaxFileJS:
+            raise ValueError('missing syntax_file_js setting')
+
+        panel.set_syntax_file(syntaxFileJS)
         panel.display(javascript, edit)
 
     def _write_compile_error_to_panel(self, error, edit):
