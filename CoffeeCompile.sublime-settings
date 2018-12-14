@@ -89,6 +89,7 @@
       */
 ,    "syntax_patterns": [
           "Packages/CoffeeScript/CoffeeScript.tmLanguage"
+     ,    "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage"
      ,    "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
      ,    "Packages/Better CoffeeScript/CoffeeScript_Literate.tmLanguage"
      ,    "Packages/Text/Plain text.tmLanguage"
